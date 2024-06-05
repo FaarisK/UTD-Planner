@@ -1,0 +1,171 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gather</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+html {
+    height: 100%;
+    background: radial-gradient(circle at top right, 
+                                #2C2C54 0%,  /* Dark Grayish-Blue */
+                                #003F5C 50%,  /* Dark Teal */
+                                #161623 100%);  /* Deep Navy Blue */
+}
+
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-size: 18px;
+            background: transparent; 
+        }
+
+        header {
+            color: #EDEDED;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+
+        nav a {
+            color: #EDEDED;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: grey;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .content {
+            text-align: left;
+            padding: 10px;
+            flex: 1;
+            color: #EDEDED;
+            font-size: 18px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #DAA520;
+            color: #252b34;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: grey;
+            color: #252b34;
+        }
+
+        .footer {
+            padding: 10px 30px;
+            color: #EDEDED;
+            font-size: 0.7em;
+            text-align: left;
+        }
+
+        img {
+            max-width: 60%;
+            height: auto;
+        }
+
+        h2 {
+            color: #EDEDED;
+            font-size: 42px;
+        }
+
+        .logo {
+            max-height: 50px;
+            margin-right: 10px;
+        }
+    </style>
+
+<script>
+    function showContent(contentId) {
+        var allContents = document.querySelectorAll('.container');
+        allContents.forEach(function (content) {
+            content.style.display = 'none';
+        });
+
+        document.getElementById(contentId).style.display = 'block';
+    }
+
+    function showHomeContent() {
+        var allContents = document.querySelectorAll('.container');
+        allContents.forEach(function (content) {
+            content.style.display = 'none';
+        });
+
+        document.getElementById('home-content').style.display = 'flex';
+    }
+</script>
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <nav>
+                <img src="C:\Users\faari\Downloads\Screenshot_2023-10-15_002025-removebg-preview (1).png" alt="Gather Logo" class="logo">
+                <a href="#" onclick="showHomeContent()">Home</a>
+                <a href="#" onclick="showContent('about-content')">About Us</a>       
+            <a href="#" onclick="showContent('contact-content')">Contact Us</a>
+            <a href="https://www.sixflags.com/overtexas/plan-your-visit/park-hours" target="_blank">Get Started</a>
+        </nav>
+    </header>
+
+<!-- Home Content -->
+<div id="home-content" class="container">
+    <div class="content">
+        <h2>Welcome to Gather!</h2>
+        <p>The app Gather aims to link students to all the activities and social networks on campus.</p>
+        <a href="#" onclick="showContent('about-content')" class="btn">About Us</a>
+        <a href="https://www.sixflags.com/overtexas/plan-your-visit/park-hours" class="btn" target="_blank">Get Started</a>
+    </div>
+    <img src="C:\Users\faari\Downloads\powr-removebg-preview__1_-removebg-preview.png" alt="Gather Image">
+</div>
+
+    <!-- About Content -->
+    <div id="about-content" class="container" style="display: none;">
+        <h2>About Us</h2>
+        <p>Gather is an innovative platform designed to connect students to the plethora of activities and social networks available on campus. Our mission is to enhance the student experience, foster community engagement, and contribute to holistic personal development. With a focus on inclusivity, diversity, and student well-being, Gather is not just an app but a community where every student belongs and thrives.</p>
+    </div>
+
+    <!-- Contact Content -->
+    <div id="contact-content" class="container" style="display: none;">
+        <h2>Contact Us</h2>
+        <p>For inquiries, suggestions, or feedback, feel free to reach us at <a href="mailto:som21aaron@gmail.com" style="color: #DAA520;">som21aaron@gmail.com</a>.</p>
+    </div>
+
+    <footer class="footer">
+        <p>For any inquiries please contact us at: <a href="mailto:som21aaron@gmail.com" style="color: #EDEDED;">som21aaron@gmail.com</a></p>
+        <p>&copy; 2023 Gather Inc. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
