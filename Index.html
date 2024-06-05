@@ -27,7 +27,7 @@
             color: #EDEDED;
             padding: 10px 20px;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -121,6 +121,20 @@
 
             document.getElementById('home-content').style.display = 'flex';
         }
+
+        function checkUser() {
+            var userEmail = localStorage.getItem('userEmail');
+            if (!userEmail) {
+                window.location.href = 'sign-in.html';
+            }
+        }
+
+        function signOut() {
+            localStorage.removeItem('userEmail');
+            window.location.href = 'sign-in.html';
+        }
+
+        window.onload = checkUser;
     </script>
 </head>
 <body>
@@ -132,6 +146,7 @@
             <a href="searchclasses.html">Search Classes</a>
             <a href="https://www.sixflags.com/overtexas/plan-your-visit/park-hours" target="_blank">Get Started</a>
         </nav>
+        <a href="#" onclick="signOut()" class="btn">Sign Out</a>
     </header>
 
     <!-- Home Content -->
