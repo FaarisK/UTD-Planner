@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function signUp(event) {
+            event.preventDefault(); // Prevents the form from submitting and refreshing the page
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (email && password && password === confirmPassword) {
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userPassword', password);
+                alert('Account created successfully. Please sign in.');
+                window.location.href = 'sign-in.html';
+            } else {
+                alert('Please make sure to fill out all fields and that passwords match.');
+            }
+        }
+
+        function checkUser() {
+            var userEmail = localStorage.getItem('userEmail');
+            if (userEmail) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        window.onload = checkUser;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h2>Sign Up</h2>
+            <form onsubmit="signUp(event)">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="sign-in.html" style="color: #D99326;">Sign In</a></p>
+        </div>
+    </div>
+</body>
+</html>
