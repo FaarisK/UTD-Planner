@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Classes</title>
+    <title>Add Classes</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script>
         function checkUser() {
-            var currentUser = localStorage.getItem('currentUser');
-            if (!currentUser) {
+            var userEmail = localStorage.getItem('userEmail');
+            if (!userEmail) {
                 window.location.href = 'sign-in.html';
             }
         }
 
         function signOut() {
-            localStorage.removeItem('currentUser');
+            localStorage.removeItem('userEmail');
             window.location.href = 'sign-in.html';
         }
 
@@ -36,8 +36,8 @@
 
     <div class="container">
         <div class="content">
-            <h2>Search Classes</h2>
-            <p>Here you can search for classes to add to your schedule.</p>
+            <h2>Add Classes</h2>
+            <p>Here you can add new classes to your schedule.</p>
         </div>
     </div>
 
