@@ -11,7 +11,7 @@
             background: radial-gradient(circle at top right, 
                                         #2C2C54 0%,  
                                         #003F5C 50%,  
-                                        #161623 100%);  
+                                        #231f16 100%);  
         }
 
         body {
@@ -67,7 +67,7 @@
         .btn {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #D99326;
+            background-color: #DAA520;
             color: #252b34;
             border-radius: 5px;
             text-decoration: none;
@@ -123,14 +123,14 @@
         }
 
         function checkUser() {
-            var currentUser = localStorage.getItem('currentUser');
-            if (!currentUser) {
+            var userEmail = localStorage.getItem('userEmail');
+            if (!userEmail) {
                 window.location.href = 'sign-in.html';
             }
         }
 
         function signOut() {
-            localStorage.removeItem('currentUser');
+            localStorage.removeItem('userEmail');
             window.location.href = 'sign-in.html';
         }
 
