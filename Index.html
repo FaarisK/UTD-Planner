@@ -67,7 +67,7 @@
         .btn {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #DAA520;
+            background-color: #D99326;
             color: #252b34;
             border-radius: 5px;
             text-decoration: none;
@@ -123,14 +123,14 @@
         }
 
         function checkUser() {
-            var userEmail = localStorage.getItem('userEmail');
-            if (!userEmail) {
+            var currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
                 window.location.href = 'sign-in.html';
             }
         }
 
         function signOut() {
-            localStorage.removeItem('userEmail');
+            localStorage.removeItem('currentUser');
             window.location.href = 'sign-in.html';
         }
 
