@@ -24,8 +24,8 @@
         }
 
         function checkUser() {
-            var userEmail = localStorage.getItem('userEmail');
-            if (userEmail) {
+            var currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
                 window.location.href = 'index.html';
             }
         }
