@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="styles.css">
     <script>
         function checkUser() {
-            var userEmail = localStorage.getItem('userEmail');
-            if (!userEmail) {
+            var currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
                 window.location.href = 'sign-in.html';
             }
         }
 
         function signOut() {
-            localStorage.removeItem('userEmail');
+            localStorage.removeItem('currentUser');
             window.location.href = 'sign-in.html';
         }
 
