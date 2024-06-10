@@ -21,14 +21,14 @@
 
         function addClass(cls) {
             var currentUser = localStorage.getItem('currentUser');
-            var userClasses = JSON.parse(localStorage.getItem(currentUser + '_classes')) || [];
-            if (!userClasses.includes(cls)) {
-                userClasses.push(cls);
-                localStorage.setItem(currentUser + '_classes', JSON.stringify(userClasses));
-                alert('Class added: ' + cls);
-            } else {
-                alert('Class already added: ' + cls);
+            var userClasses = JSON.parse(localStorage.getItem(currentUser + '_classes')) || {};
+            if (!userClasses['fall1']) {
+                userClasses['fall1'] = [];
             }
+            userClasses['fall1'].push(cls);
+            localStorage.setItem(currentUser + '_classes', JSON.stringify(userClasses));
+            alert('Class added: ' + cls);
+            window.location.href = 'index.html'; // Redirect to home to see the added class
         }
 
         window.onload = checkUser;
@@ -39,7 +39,7 @@
         <nav>
             <img src="C:/Users/faari/Downloads/Screenshot_2023-10-15_002025-removebg-preview (1).png" alt="Gather Logo" class="logo">
             <a href="index.html">Home</a>
-            <a href="addclasses.html">Add Classes</a>       
+            <a href="addclasses.html">Add Classes</a>
             <a href="searchclasses.html">Search Classes</a>
             <a href="https://www.sixflags.com/overtexas/plan-your-visit/park-hours" target="_blank">Get Started</a>
         </nav>
