@@ -46,6 +46,7 @@ nav a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: column;
 }
 
 .content {
@@ -54,6 +55,43 @@ nav a:hover {
     flex: 1;
     color: #EDEDED;
     font-size: 18px;
+    width: 100%;
+}
+
+.class-category {
+    margin-bottom: 20px;
+}
+
+.class-category h3 {
+    color: #D99326;
+    margin-bottom: 10px;
+}
+
+.class-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.class-category li {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.class-category button {
+    background-color: #D99326;
+    color: #252b34;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.class-category button:hover {
+    background-color: grey;
+    color: #252b34;
 }
 
 .btn {
