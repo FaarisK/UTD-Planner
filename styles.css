@@ -94,6 +94,46 @@ nav a:hover {
     color: #252b34;
 }
 
+.flowchart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.year {
+    display: flex;
+    justify-content: space-between;
+}
+
+.semester {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    width: 45%;
+    min-width: 300px;
+    min-height: 200px;
+}
+
+.semester h3 {
+    color: #D99326;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.class-item {
+    background: #2C2C54;
+    color: #EDEDED;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: move;
+}
+
+.class-item.dragging {
+    opacity: 0.5;
+}
+
 .btn {
     display: inline-block;
     padding: 10px 20px;
