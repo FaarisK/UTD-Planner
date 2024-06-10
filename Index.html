@@ -54,6 +54,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-direction: column;
         }
 
         .content {
@@ -62,6 +63,7 @@
             flex: 1;
             color: #EDEDED;
             font-size: 18px;
+            width: 100%;
         }
 
         .btn {
@@ -123,9 +125,12 @@
         }
 
         function checkUser() {
-            var userEmail = localStorage.getItem('currentUser');
-            if (!userEmail) {
+            var currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
                 window.location.href = 'sign-in.html';
+            } else {
+                showHomeContent();
+                loadClasses();
             }
         }
 
@@ -134,13 +139,25 @@
             window.location.href = 'sign-in.html';
         }
 
+        function loadClasses() {
+            var currentUser = localStorage.getItem('currentUser');
+            var userClasses = JSON.parse(localStorage.getItem(currentUser + '_classes')) || [];
+            var classList = document.getElementById('class-list');
+            classList.innerHTML = '';
+            userClasses.forEach(function (cls) {
+                var classItem = document.createElement('li');
+                classItem.textContent = cls;
+                classList.appendChild(classItem);
+            });
+        }
+
         window.onload = checkUser;
     </script>
 </head>
 <body>
     <header>
         <nav>
-            <img src="C:\Users\A6822\Downloads\Screenshot 2024-06-07 172607.png" alt="Gather Logo" class="logo">
+            <img src="C:/Users/faari/Downloads/Screenshot_2023-10-15_002025-removebg-preview (1).png" alt="Gather Logo" class="logo">
             <a href="#" onclick="showHomeContent()">Home</a>
             <a href="addclasses.html">Add Classes</a>       
             <a href="searchclasses.html">Search Classes</a>
@@ -154,14 +171,14 @@
         <div class="content">
             <h2>Welcome to Planner!</h2>
             <p>The app Planner aims to link students to all the activities and social networks on campus.</p>
-            <a href="addclasses.html" class="btn">Add Classes</a>
-            <a href="searchclasses.html" class="btn">Search Classes</a>
+            <h3>Your Classes</h3>
+            <ul id="class-list"></ul>
         </div>
-        <img src="C:\Users\A6822\Downloads\Screenshot 2024-06-07 172607.png" alt="Gather Image">
+        <img src="C:/Users/faari/Downloads/powr-removebg-preview__1_-removebg-preview.png" alt="Gather Image">
     </div>
 
     <footer class="footer">
-        <p>For any inquiries please contact us at: <a href="mailto:faarisamirkhan@gmail.com" style="color: #EDEDED;">faarisamirkhan@gmail.com</a></p>
+        <p>For any inquiries please contact us at: <a href="mailto:faarisamirkhan@gmail.com" style="color: #EDEDED;">som21aaron@gmail.com</a></p>
         <p>&copy; 2024 Planner Inc. All rights reserved.</p>
     </footer>
 </body>
