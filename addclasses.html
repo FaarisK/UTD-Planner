@@ -19,6 +19,18 @@
             window.location.href = 'sign-in.html';
         }
 
+        function addClass(cls) {
+            var currentUser = localStorage.getItem('currentUser');
+            var userClasses = JSON.parse(localStorage.getItem(currentUser + '_classes')) || [];
+            if (!userClasses.includes(cls)) {
+                userClasses.push(cls);
+                localStorage.setItem(currentUser + '_classes', JSON.stringify(userClasses));
+                alert('Class added: ' + cls);
+            } else {
+                alert('Class already added: ' + cls);
+            }
+        }
+
         window.onload = checkUser;
     </script>
 </head>
@@ -37,7 +49,83 @@
     <div class="container">
         <div class="content">
             <h2>Add Classes</h2>
-            <p>Here you can add new classes to your schedule.</p>
+            <div class="class-category">
+                <h3>Communication</h3>
+                <ul>
+                    <li>COMM 1311 Survey of Oral and Technology-based Communication <button onclick="addClass('COMM 1311 Survey of Oral and Technology-based Communication')">Add</button></li>
+                    <li>RHET 1302 Rhetoric <button onclick="addClass('RHET 1302 Rhetoric')">Add</button></li>
+                    <li>Or select any 6 semester credit hours from Communication Core courses (see advisor)</li>
+                </ul>
+            </div>
+
+            <div class="class-category">
+                <h3>Mathematics</h3>
+                <ul>
+                    <li>MATH 1325 Applied Calculus I <button onclick="addClass('MATH 1325 Applied Calculus I')">Add</button></li>
+                    <li>MATH 2413 Differential Calculus <button onclick="addClass('MATH 2413 Differential Calculus')">Add</button></li>
+                    <li>MATH 2417 Calculus I <button onclick="addClass('MATH 2417 Calculus I')">Add</button></li>
+                    <li>Or select any 3 semester credit hours from Mathematics Core courses (see advisor)</li>
+                </ul>
+            </div>
+
+            <div class="class-category">
+                <h3>Life and Physical Sciences</h3>
+                <ul>
+                    <li>CHEM 1311 General Chemistry I <button onclick="addClass('CHEM 1311 General Chemistry I')">Add</button></li>
+                    <li>CHEM 1315 Honors Freshman Chemistry I <button onclick="addClass('CHEM 1315 Honors Freshman Chemistry I')">Add</button></li>
+                    <li>CHEM 1312 General Chemistry II <button onclick="addClass('CHEM 1312 General Chemistry II')">Add</button></li>
+                    <li>CHEM 1316 Honors Freshman Chemistry II <button onclick="addClass('CHEM 1316 Honors Freshman Chemistry II')">Add</button></li>
+                    <li>Or select any 6 semester credit hours from Life and Physical Sciences Core courses (see advisor)</li>
+                </ul>
+            </div>
+
+            <div class="class-category">
+                <h3>Language, Philosophy and Culture</h3>
+                <ul>
+                    <li>Select any 3 semester credit hours from Language, Philosophy and Culture Core courses (see advisor)</li>
+                </ul>
+            </div>
+
+            <div class="class-category">
+                <h3>Creative Arts</h3>
+                <ul>
+                    <li>Select any 3 semester credit hours Creative Arts Core courses (see advisor)</li>
+                </ul>
+            </div>
+
+            <div class="class-category">
+                <h3>American History</h3>
+                <ul>
+                    <li>Select any 6 semester credit hours from American History Core courses (see advisor)</li>
+                </ul>
+            </div>
+
+            <div class="class-category">
+                <h3>Government / Political Science</h3>
+                <ul>
+                    <li>GOVT 2305 American National Government <button onclick="addClass('GOVT 2305 American National Government')">Add</button></li>
+                    <li>GOVT 2306 State and Local Government <button onclick="addClass('GOVT 2306 State and Local Government')">Add</button></li>
+                    <li>Or select any 6 semester credit hours from Government/Political Science Core courses (see advisor)</li>
+                </ul>
+            </div>
+
+            <div class="class-category">
+                <h3>Social and Behavioral Sciences</h3>
+                <ul>
+                    <li>Select any 3 semester credit hours from Social and Behavioral Sciences Core courses (see advisor)</li>
+                </ul>
+            </div>
+
+            <div class="class-category">
+                <h3>Component Area Option</h3>
+                <ul>
+                    <li>BIOL 2311 Introduction to Modern Biology I <button onclick="addClass('BIOL 2311 Introduction to Modern Biology I')">Add</button></li>
+                    <li>MATH 2414 Integral Calculus <button onclick="addClass('MATH 2414 Integral Calculus')">Add</button></li>
+                    <li>MATH 2419 Calculus II <button onclick="addClass('MATH 2419 Calculus II')">Add</button></li>
+                    <li>STAT 2332 Introductory Statistics for Life Sciences <button onclick="addClass('STAT 2332 Introductory Statistics for Life Sciences')">Add</button></li>
+                    <li>Or select any 6 semester credit hours from Component Area Option Core courses (see advisor)</li>
+                </ul>
+            </div>
         </div>
     </div>
 
