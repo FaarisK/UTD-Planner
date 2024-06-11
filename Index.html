@@ -125,9 +125,10 @@
             min-width: 300px;
             min-height: 200px;
         }
-
+        
         .semester h3 {
-            color: #D99326;
+            /*original color: D99326*/
+            color: #ffff; 
             text-align: center;
             margin-bottom: 10px;
         }
@@ -144,6 +145,24 @@
         .class-item.dragging {
             opacity: 0.5;
         }
+
+        <!--Delete Button-->
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #D32F2F;
+            color: white;
+            border: none;
+            padding: 3px 5px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: #B71C1C;
+        }
+
     </style>
     <script>
         function checkUser() {
@@ -166,7 +185,10 @@
             var semesters = ['fall1', 'spring1', 'fall2', 'spring2', 'fall3', 'spring3', 'fall4', 'spring4'];
             semesters.forEach(function(semester) {
                 var semesterEl = document.getElementById(semester);
-                semesterEl.innerHTML = '';
+                var classItems = semesterEl.querySelectorAll('.class-item');
+                classItems.forEach(function(item) {
+                    item.remove();
+                });
                 if (userClasses[semester]) {
                     userClasses[semester].forEach(function(cls) {
                         var classItem = document.createElement('div');
@@ -175,6 +197,19 @@
                         classItem.setAttribute('draggable', true);
                         classItem.addEventListener('dragstart', dragStart);
                         classItem.addEventListener('dragend', dragEnd);
+
+                        <!--------Delete Button Function Body-------->
+
+                        var deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'X';
+                        deleteButton.classList.add('delete-btn');
+                        deleteButton.addEventListener('click', function() {
+                            classItem.remove();
+                            saveClasses();
+                        });
+
+                        classItem.appendChild(deleteButton);
+
                         semesterEl.appendChild(classItem);
                     });
                 }
