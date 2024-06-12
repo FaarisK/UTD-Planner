@@ -4,45 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <!-- 
+        This HTML file provides the sign-up functionality for the Planner project.
+        The purpose of this file is to allow new users to create an account by providing their email and password.
+        It stores the user's credentials in the browser's local storage and redirects them to the sign-in page upon successful registration.
+        This functionality is essential for user onboarding and ensuring that new users can access the platform.
+        It contributes to the overall project by enabling user registration and account creation.
+    -->
+
+    <!-- Link to Google Fonts for Plus Jakarta Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Internal JavaScript for sign-up functionality -->
     <script>
+        // Function to handle sign-up form submission
         function signUp(event) {
             event.preventDefault(); // Prevents the form from submitting and refreshing the page
+            
+            // Get email and password input values
             var email = document.getElementById('email').value;
             var password = document.getElementById('password').value;
             var confirmPassword = document.getElementById('confirmPassword').value;
 
+            // Check if email, password, and confirm password fields are filled and passwords match
             if (email && password && password === confirmPassword) {
+                // Store the user's email and password in local storage
                 localStorage.setItem('userEmail', email);
                 localStorage.setItem('userPassword', password);
                 alert('Account created successfully. Please sign in.');
-                window.location.href = 'sign-in.html';
+                window.location.href = 'sign-in.html'; // Redirect to sign-in page
             } else {
-                alert('Please make sure to fill out all fields and that passwords match.');
+                alert('Please make sure to fill out all fields and that passwords match.'); // Show error message
             }
         }
 
+        // Function to check if a user is already signed in
         function checkUser() {
             var currentUser = localStorage.getItem('currentUser');
             if (currentUser) {
-                window.location.href = 'index.html';
+                window.location.href = 'index.html'; // Redirect to home page if already signed in
             }
         }
 
+        // Check user on window load
         window.onload = checkUser;
     </script>
 </head>
 <body>
+    <!-- Main container for the sign-up content -->
     <div class="container">
         <div class="content">
             <h2>Sign Up</h2>
+            <!-- Sign-up form -->
             <form onsubmit="signUp(event)">
+                <!-- Email input field -->
                 <input type="email" id="email" placeholder="Email" required>
+                <!-- Password input field -->
                 <input type="password" id="password" placeholder="Password" required>
+                <!-- Confirm password input field -->
                 <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <!-- Submit button -->
                 <button type="submit" class="btn">Sign Up</button>
             </form>
+            <!-- Link to sign-in page -->
             <p>Already have an account? <a href="sign-in.html" style="color: #D99326;">Sign In</a></p>
         </div>
     </div>
