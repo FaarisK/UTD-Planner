@@ -4,8 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planner</title>
+    <!-- 
+        This HTML file is the main entry point of the Planner project.
+        The purpose of this file is to provide a home page where users can view and manage their academic schedule.
+        It includes a flowchart interface that displays classes organized by semesters.
+        This functionality is essential for users to visualize their academic plan and make adjustments as needed.
+        It contributes to the overall project by offering a user-friendly and interactive way to manage class schedules.
+    -->
+
+    <!-- Link to Google Fonts for Plus Jakarta Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Internal stylesheet -->
     <style>
+        /* Global styles for the entire HTML document */
         html {
             height: 100%;
             background: radial-gradient(circle at top right, 
@@ -14,6 +26,7 @@
                                         #231f16 100%);  
         }
 
+        /* Basic styling for the body */
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
@@ -23,6 +36,7 @@
             background: transparent; 
         }
 
+        /* Styling for the header */
         header {
             color: #EDEDED;
             padding: 10px 20px;
@@ -31,11 +45,13 @@
             align-items: center;
         }
 
+        /* Styling for the navigation menu */
         nav {
             display: flex;
             align-items: center;
         }
 
+        /* Styling for navigation links */
         nav a {
             color: #EDEDED;
             text-decoration: none;
@@ -47,6 +63,7 @@
             color: grey;
         }
 
+        /* Container styling */
         .container {
             max-width: 1200px;
             margin: 20px auto;
@@ -83,6 +100,7 @@
             color: #252b34;
         }
 
+        /* Footer styling */
         .footer {
             padding: 10px 30px;
             color: #EDEDED;
@@ -127,7 +145,6 @@
         }
         
         .semester h3 {
-            /*original color: D99326*/
             color: #ffff; 
             text-align: center;
             margin-bottom: 10px;
@@ -146,7 +163,7 @@
             opacity: 0.5;
         }
 
-        <!--Delete Button-->
+        /* Styling for the delete button inside class items */
         .delete-btn {
             position: absolute;
             top: 5px;
@@ -164,21 +181,29 @@
         }
 
     </style>
+    
+    <!-- Internal JavaScript for functionality -->
     <script>
+        // Function to check if the user is logged in
         function checkUser() {
             var currentUser = localStorage.getItem('currentUser');
             if (!currentUser) {
+                // Redirect to sign-in page if no user is logged in
                 window.location.href = 'sign-in.html';
             } else {
+                // Load user classes if logged in
                 loadClasses();
             }
         }
 
+        // Function to log out the user
         function signOut() {
+            // Remove current user from local storage and redirect to sign-in page
             localStorage.removeItem('currentUser');
             window.location.href = 'sign-in.html';
         }
 
+        // Function to load classes from local storage
         function loadClasses() {
             var currentUser = localStorage.getItem('currentUser');
             var userClasses = JSON.parse(localStorage.getItem(currentUser + '_classes')) || {};
@@ -186,9 +211,11 @@
             semesters.forEach(function(semester) {
                 var semesterEl = document.getElementById(semester);
                 var classItems = semesterEl.querySelectorAll('.class-item');
+                // Clear existing classes
                 classItems.forEach(function(item) {
                     item.remove();
                 });
+                // Add classes from local storage
                 if (userClasses[semester]) {
                     userClasses[semester].forEach(function(cls) {
                         var classItem = document.createElement('div');
@@ -198,8 +225,7 @@
                         classItem.addEventListener('dragstart', dragStart);
                         classItem.addEventListener('dragend', dragEnd);
 
-                        <!--------Delete Button Function Body-------->
-
+                        // Create delete button for each class item
                         var deleteButton = document.createElement('button');
                         deleteButton.textContent = 'X';
                         deleteButton.classList.add('delete-btn');
@@ -216,6 +242,7 @@
             });
         }
 
+        // Function to save classes to local storage
         function saveClasses() {
             var currentUser = localStorage.getItem('currentUser');
             var userClasses = {};
@@ -230,19 +257,23 @@
             localStorage.setItem(currentUser + '_classes', JSON.stringify(userClasses));
         }
 
+        // Function to handle the start of dragging
         function dragStart(event) {
             event.dataTransfer.setData('text/plain', event.target.textContent);
             event.target.classList.add('dragging');
         }
 
+        // Function to handle the end of dragging
         function dragEnd(event) {
             event.target.classList.remove('dragging');
         }
 
+        // Function to allow dropping elements
         function allowDrop(event) {
             event.preventDefault();
         }
 
+        // Function to handle drop event
         function drop(event) {
             event.preventDefault();
             var data = event.dataTransfer.getData('text/plain');
@@ -256,19 +287,21 @@
             saveClasses();
         }
 
+        // Check user on window load
         window.onload = checkUser;
     </script>
 </head>
 <body>
     <header>
         <nav>
-
+            <!-- Navigation menu -->
             <img src="images/wifi.svg" alt="Planner Logo" class="logo">
             <a href="#">Home</a>
             <a href="addclasses.html">Add Classes</a>
             <a href="searchclasses.html">Search Classes</a>
             <a href="https://nsm.utdallas.edu/advising/degree-plans/" target="_blank">Example flowcharts</a>
         </nav>
+        <!-- Sign out button -->
         <a href="#" onclick="signOut()" class="btn">Sign Out</a>
     </header>
 
@@ -277,6 +310,7 @@
             <h2>Welcome to Planner!</h2>
             <p>The app Planner aims to link students to all the activities and social networks on campus.</p>
             <h3>Your Classes</h3>
+            <!-- Flowchart structure to display class schedule -->
             <div class="flowchart">
                 <div class="year">
                     <div id="fall1" class="semester" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -315,6 +349,7 @@
     </div>
 
     <footer class="footer">
+        <!-- Footer section with contact information -->
         <p>For any inquiries please contact: <a href="mailto:faarisamirkhan@gmail.com" style="color: #EDEDED;">faarisamirkhan@gmail.com</a></p>
         <p>&copy; 2024 Planner Inc. All rights reserved.</p>
     </footer>
