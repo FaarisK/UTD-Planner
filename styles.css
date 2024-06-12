@@ -1,11 +1,13 @@
+/* Set the height and background gradient for the HTML element */
 html {
     height: 100%;
     background: radial-gradient(circle at top right, 
-                                #2C2C54 0%,  
-                                #003F5C 50%,  
-                                #161623 100%);  
+                                #2C2C54 0%,  /* Dark Grayish-Blue */
+                                #003F5C 50%,  /* Dark Teal */
+                                #161623 100%);  /* Deep Navy Blue */
 }
 
+/* Basic styling for the body element */
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     margin: 0;
@@ -15,6 +17,7 @@ body {
     background: transparent; 
 }
 
+/* Styling for the header element */
 header {
     color: #EDEDED;
     padding: 10px 20px;
@@ -23,11 +26,13 @@ header {
     align-items: center;
 }
 
+/* Styling for the navigation bar */
 nav {
     display: flex;
     align-items: center;
 }
 
+/* Styling for the links in the navigation bar */
 nav a {
     color: #EDEDED;
     text-decoration: none;
@@ -35,10 +40,12 @@ nav a {
     transition: color 0.3s;
 }
 
+/* Hover effect for the links in the navigation bar */
 nav a:hover {
     color: grey;
 }
 
+/* Container for the main content */
 .container {
     max-width: 1200px;
     margin: 20px auto;
@@ -49,6 +56,7 @@ nav a:hover {
     flex-direction: column;
 }
 
+/* Styling for the main content area */
 .content {
     text-align: left;
     padding: 10px;
@@ -58,20 +66,24 @@ nav a:hover {
     width: 100%;
 }
 
+/* Styling for class categories in the add classes page */
 .class-category {
     margin-bottom: 20px;
 }
 
+/* Styling for the headings of class categories */
 .class-category h3 {
     color: #D99326;
     margin-bottom: 10px;
 }
 
+/* Remove list styling for class lists */
 .class-category ul {
     list-style: none;
     padding: 0;
 }
 
+/* Styling for individual class items in the list */
 .class-category li {
     margin-bottom: 10px;
     display: flex;
@@ -79,6 +91,7 @@ nav a:hover {
     align-items: center;
 }
 
+/* Styling for the add class buttons */
 .class-category button {
     background-color: #D99326;
     color: #252b34;
@@ -89,11 +102,13 @@ nav a:hover {
     transition: background-color 0.3s, color 0.3s;
 }
 
+/* Hover effect for the add class buttons */
 .class-category button:hover {
     background-color: grey;
     color: #252b34;
 }
 
+/* Styling for the flowchart container */
 .flowchart {
     display: flex;
     flex-direction: column;
@@ -101,11 +116,13 @@ nav a:hover {
     margin-top: 20px;
 }
 
+/* Styling for the year containers in the flowchart */
 .year {
     display: flex;
     justify-content: space-between;
 }
 
+/* Styling for individual semesters in the flowchart */
 .semester {
     background: rgba(255, 255, 255, 0.1);
     padding: 10px;
@@ -115,12 +132,14 @@ nav a:hover {
     min-height: 200px;
 }
 
+/* Styling for the semester headings */
 .semester h3 {
     color: #D99326;
     text-align: center;
     margin-bottom: 10px;
 }
 
+/* Styling for individual class items in the flowchart */
 .class-item {
     background: #2C2C54;
     color: #EDEDED;
@@ -130,10 +149,12 @@ nav a:hover {
     cursor: move;
 }
 
+/* Styling for class items while dragging */
 .class-item.dragging {
     opacity: 0.5;
 }
 
+/* Styling for buttons */
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -146,11 +167,13 @@ nav a:hover {
     transition: background-color 0.3s, color 0.3s;
 }
 
+/* Hover effect for buttons */
 .btn:hover {
     background-color: grey;
     color: #252b34;
 }
 
+/* Styling for the footer */
 .footer {
     padding: 10px 30px;
     color: #EDEDED;
@@ -158,16 +181,19 @@ nav a:hover {
     text-align: left;
 }
 
+/* Styling for images */
 img {
     max-width: 60%;
     height: auto;
 }
 
+/* Styling for h2 headings */
 h2 {
     color: #EDEDED;
     font-size: 42px;
 }
 
+/* Styling for the logo */
 .logo {
     max-height: 50px;
     margin-right: 10px;
