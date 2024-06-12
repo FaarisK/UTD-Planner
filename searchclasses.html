@@ -4,39 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Classes</title>
+    <!-- 
+        This HTML file is part of the Planner project.
+        The purpose of this file is to provide a search interface where users can view available classes in various categories.
+        This functionality is essential for users to explore the classes offered and plan their academic schedules effectively.
+        It contributes to the overall project by enhancing user engagement and making it easier for users to find and select courses.
+    -->
+    
+    <!-- Link to Google Fonts for Plus Jakarta Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Internal JavaScript for functionality -->
     <script>
+        // Function to check if the user is logged in
         function checkUser() {
             var currentUser = localStorage.getItem('currentUser');
             if (!currentUser) {
+                // Redirect to sign-in page if no user is logged in
                 window.location.href = 'sign-in.html';
             }
         }
 
+        // Function to log out the user
         function signOut() {
+            // Remove current user from local storage and redirect to sign-in page
             localStorage.removeItem('currentUser');
             window.location.href = 'sign-in.html';
         }
 
+        // Check user on window load
         window.onload = checkUser;
     </script>
 </head>
 <body>
     <header>
         <nav>
+            <!-- Navigation menu -->
             <img src="images/wifi.svg" alt="Planner Logo" class="logo">
             <a href="index.html">Home</a>
             <a href="addclasses.html">Add Classes</a>       
             <a href="searchclasses.html">Search Classes</a>
-            <a href="https://www.sixflags.com/overtexas/plan-your-visit/park-hours" target="_blank">Get Started</a>
+            <a href="https://nsm.utdallas.edu/advising/degree-plans/" target="_blank">Example flowcharts</a>
         </nav>
+        <!-- Sign out button -->
         <a href="#" onclick="signOut()" class="btn">Sign Out</a>
     </header>
 
     <div class="container">
         <div class="content">
             <h2>Search Classes</h2>
+            <!--
+                The purpose of this section is to provide users with a comprehensive list of available classes that they can browse through.
+                It enables users to see what classes are offered under different categories such as Communication, Mathematics, Life and Physical Sciences, etc.
+                This contributes to the overall project by allowing users to explore all potential classes and plan their academic schedule effectively.
+            -->
             <div class="class-category">
                 <h3>Communication</h3>
                 <ul>
@@ -118,6 +142,7 @@
     </div>
 
     <footer class="footer">
+        <!-- Footer section with contact information -->
         <p>For any inquiries please contact: <a href="mailto:faarisamirkhan@gmail.com" style="color: #EDEDED;">faarisamirkhan@gmail.com</a></p>
         <p>&copy; 2024 Planner Inc. All rights reserved.</p>
     </footer>
