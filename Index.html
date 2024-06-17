@@ -15,172 +15,8 @@
     <!-- Link to Google Fonts for Plus Jakarta Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Internal stylesheet -->
-    <style>
-        /* Global styles for the entire HTML document */
-        html {
-            height: 100%;
-            background: radial-gradient(circle at top right, 
-                                        #2C2C54 0%,  
-                                        #003F5C 50%,  
-                                        #231f16 100%);  
-        }
-
-        /* Basic styling for the body */
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-size: 18px;
-            background: transparent; 
-        }
-
-        /* Styling for the header */
-        header {
-            color: #EDEDED;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Styling for the navigation menu */
-        nav {
-            display: flex;
-            align-items: center;
-        }
-
-        /* Styling for navigation links */
-        nav a {
-            color: #EDEDED;
-            text-decoration: none;
-            margin: 0 15px;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: grey;
-        }
-
-        /* Container styling */
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-direction: column;
-        }
-
-        .content {
-            text-align: left;
-            padding: 10px;
-            flex: 1;
-            color: #EDEDED;
-            font-size: 18px;
-            width: 100%;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #D99326;
-            color: #252b34;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-top: 20px;
-            font-weight: bold;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .btn:hover {
-            background-color: grey;
-            color: #252b34;
-        }
-
-        /* Footer styling */
-        .footer {
-            padding: 10px 30px;
-            color: #EDEDED;
-            font-size: 0.7em;
-            text-align: left;
-        }
-
-        img {
-            max-width: 60%;
-            height: auto;
-        }
-
-        h2 {
-            color: #EDEDED;
-            font-size: 42px;
-        }
-
-        .logo {
-            max-height: 50px;
-            margin-right: 10px;
-        }
-
-        .flowchart {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .year {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .semester {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 5px;
-            width: 45%;
-            min-width: 300px;
-            min-height: 200px;
-        }
-        
-        .semester h3 {
-            color: #ffff; 
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .class-item {
-            background: #2C2C54;
-            color: #EDEDED;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            cursor: move;
-        }
-
-        .class-item.dragging {
-            opacity: 0.5;
-        }
-
-        /* Styling for the delete button inside class items */
-        .delete-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background-color: #D32F2F;
-            color: white;
-            border: none;
-            padding: 3px 5px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .delete-btn:hover {
-            background-color: #B71C1C;
-        }
-
-    </style>
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="styles.css">
     
     <!-- Internal JavaScript for functionality -->
     <script>
@@ -208,38 +44,50 @@
             var currentUser = localStorage.getItem('currentUser');
             var userClasses = JSON.parse(localStorage.getItem(currentUser + '_classes')) || {};
             var semesters = ['fall1', 'spring1', 'fall2', 'spring2', 'fall3', 'spring3', 'fall4', 'spring4'];
+            var totalCredits = 0;
+
             semesters.forEach(function(semester) {
                 var semesterEl = document.getElementById(semester);
+                var creditsEl = semesterEl.querySelector('.credits');
                 var classItems = semesterEl.querySelectorAll('.class-item');
+                var semesterCredits = 0;
+                
                 // Clear existing classes
                 classItems.forEach(function(item) {
                     item.remove();
                 });
+                
                 // Add classes from local storage
                 if (userClasses[semester]) {
                     userClasses[semester].forEach(function(cls) {
-                        var classItem = document.createElement('div');
-                        classItem.classList.add('class-item');
-                        classItem.textContent = cls;
-                        classItem.setAttribute('draggable', true);
-                        classItem.addEventListener('dragstart', dragStart);
-                        classItem.addEventListener('dragend', dragEnd);
-
-                        // Create delete button for each class item
-                        var deleteButton = document.createElement('button');
-                        deleteButton.textContent = 'X';
-                        deleteButton.classList.add('delete-btn');
-                        deleteButton.addEventListener('click', function() {
-                            classItem.remove();
-                            saveClasses();
-                        });
-
-                        classItem.appendChild(deleteButton);
-
+                        var classItem = createClassItem(cls);
+                        semesterCredits += getClassCredits(cls);
                         semesterEl.appendChild(classItem);
                     });
                 }
+                creditsEl.textContent = `Credits: ${semesterCredits}`;
+                totalCredits += semesterCredits;
             });
+
+            document.getElementById('total-credits').textContent = `Total Credits: ${totalCredits}`;
+        }
+
+        // Function to create a class item element
+        function createClassItem(cls) {
+            var classItem = document.createElement('div');
+            classItem.classList.add('class-item');
+            classItem.innerHTML = `<span>${cls}</span> <button class="delete-btn">Remove</button>`;
+            classItem.setAttribute('draggable', true);
+            classItem.addEventListener('dragstart', dragStart);
+            classItem.addEventListener('dragend', dragEnd);
+
+            // Add event listener for the delete button
+            classItem.querySelector('.delete-btn').addEventListener('click', function() {
+                classItem.remove();
+                saveClasses();
+            });
+
+            return classItem;
         }
 
         // Function to save classes to local storage
@@ -250,16 +98,17 @@
             semesters.forEach(function(semester) {
                 var semesterEl = document.getElementById(semester);
                 userClasses[semester] = [];
-                semesterEl.querySelectorAll('.class-item').forEach(function(classItem) {
+                semesterEl.querySelectorAll('.class-item span').forEach(function(classItem) {
                     userClasses[semester].push(classItem.textContent);
                 });
             });
             localStorage.setItem(currentUser + '_classes', JSON.stringify(userClasses));
+            updateCredits();
         }
 
         // Function to handle the start of dragging
         function dragStart(event) {
-            event.dataTransfer.setData('text/plain', event.target.textContent);
+            event.dataTransfer.setData('text/plain', event.target.querySelector('span').textContent);
             event.target.classList.add('dragging');
         }
 
@@ -277,14 +126,57 @@
         function drop(event) {
             event.preventDefault();
             var data = event.dataTransfer.getData('text/plain');
-            var classItem = document.createElement('div');
-            classItem.classList.add('class-item');
-            classItem.textContent = data;
-            classItem.setAttribute('draggable', true);
-            classItem.addEventListener('dragstart', dragStart);
-            classItem.addEventListener('dragend', dragEnd);
+            var classItem = createClassItem(data);
+
+            // Append the new class item to the target semester
             event.target.appendChild(classItem);
             saveClasses();
+        }
+
+        // Function to get credits for a class
+        function getClassCredits(cls) {
+            const creditsMap = {
+                "COMM 1311 Survey of Oral and Technology-based Communication": 3,
+                "RHET 1302 Rhetoric": 3,
+                "MATH 1325 Applied Calculus I": 3,
+                "MATH 2413 Differential Calculus": 4,
+                "MATH 2417 Calculus I": 4,
+                "CHEM 1311 General Chemistry I": 3,
+                "CHEM 1315 Honors Freshman Chemistry I": 3,
+                "CHEM 1312 General Chemistry II": 3,
+                "CHEM 1316 Honors Freshman Chemistry II": 3,
+                "GOVT 2305 American National Government": 3,
+                "GOVT 2306 State and Local Government": 3,
+                "BIOL 2311 Introduction to Modern Biology I": 3,
+                "MATH 2414 Integral Calculus": 4,
+                "MATH 2419 Calculus II": 4,
+                "STAT 2332 Introductory Statistics for Life Sciences": 3
+            };
+            return creditsMap[cls] || 0;
+        }
+
+        // Function to update credits for each semester and total credits
+        function updateCredits() {
+            var currentUser = localStorage.getItem('currentUser');
+            var userClasses = JSON.parse(localStorage.getItem(currentUser + '_classes')) || {};
+            var semesters = ['fall1', 'spring1', 'fall2', 'spring2', 'fall3', 'spring3', 'fall4', 'spring4'];
+            var totalCredits = 0;
+
+            semesters.forEach(function(semester) {
+                var semesterEl = document.getElementById(semester);
+                var creditsEl = semesterEl.querySelector('.credits');
+                var semesterCredits = 0;
+                
+                if (userClasses[semester]) {
+                    userClasses[semester].forEach(function(cls) {
+                        semesterCredits += getClassCredits(cls);
+                    });
+                }
+                creditsEl.textContent = `Credits: ${semesterCredits}`;
+                totalCredits += semesterCredits;
+            });
+
+            document.getElementById('total-credits').textContent = `Total Credits: ${totalCredits}`;
         }
 
         // Check user on window load
@@ -309,39 +201,47 @@
         <div class="content">
             <h2>Welcome to Planner!</h2>
             <p>The app Planner aims to link students to all the activities and social networks on campus.</p>
-            <h3>Your Classes</h3>
+            <h3>Your Classes - <span id="total-credits">Total Credits: 0</span></h3>
             <!-- Flowchart structure to display class schedule -->
             <div class="flowchart">
                 <div class="year">
                     <div id="fall1" class="semester" ondrop="drop(event)" ondragover="allowDrop(event)">
                         <h3>Freshman Year - Fall</h3>
+                        <div class="credits">Credits: 0</div>
                     </div>
                     <div id="spring1" class="semester" ondrop="drop(event)" ondragover="allowDrop(event)">
                         <h3>Freshman Year - Spring</h3>
+                        <div class="credits">Credits: 0</div>
                     </div>
                 </div>
                 <div class="year">
                     <div id="fall2" class="semester" ondrop="drop(event)" ondragover="allowDrop(event)">
                         <h3>Sophomore Year - Fall</h3>
+                        <div class="credits">Credits: 0</div>
                     </div>
                     <div id="spring2" class="semester" ondrop="drop(event)" ondragover="allowDrop(event)">
                         <h3>Sophomore Year - Spring</h3>
+                        <div class="credits">Credits: 0</div>
                     </div>
                 </div>
                 <div class="year">
                     <div id="fall3" class="semester" ondrop="drop(event)" ondragover="allowDrop(event)">
                         <h3>Junior Year - Fall</h3>
+                        <div class="credits">Credits: 0</div>
                     </div>
                     <div id="spring3" class="semester" ondrop="drop(event)" ondragover="allowDrop(event)">
                         <h3>Junior Year - Spring</h3>
+                        <div class="credits">Credits: 0</div>
                     </div>
                 </div>
                 <div class="year">
                     <div id="fall4" class="semester" ondrop="drop(event)" ondragover="allowDrop(event)">
                         <h3>Senior Year - Fall</h3>
+                        <div class="credits">Credits: 0</div>
                     </div>
                     <div id="spring4" class="semester" ondrop="drop(event)" ondragover="allowDrop(event)">
                         <h3>Senior Year - Spring</h3>
+                        <div class="credits">Credits: 0</div>
                     </div>
                 </div>
             </div>
