@@ -58,6 +58,16 @@ nav a:hover {
     width: 100%;
 }
 
+.your_classes_title {
+    text-align:center;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10px;
+    padding: 5px;
+    border-color:#161623;
+    background-image:linear-gradient(to top, #003F5C 0%, #24244b 100%);
+}
+
 .class-category {
     margin-bottom: 20px;
 }
@@ -106,6 +116,8 @@ nav a:hover {
     justify-content: space-between;
 }
 
+/*Semester boxes*/
+
 .semester {
     background: rgba(255, 255, 255, 0.1);
     padding: 10px;
@@ -116,16 +128,33 @@ nav a:hover {
     position: relative; /* Added to position delete button */
 }
 
+/*Semester Titles */
+
 .semester h3 {
     color: #D99326;
     text-align: center;
     margin-bottom: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10px;
+    padding: 5px;
+    border-color:#161623;
+    background-image:linear-gradient(to top, #003F5C 0%, #24244b 100%);
 }
 
+/*Credit display*/
+
 .semester .credits {
+    width: 25%; 
+    margin: 10px auto; 
     text-align: center;
     color: #D99326;
-    margin-top: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10px;
+    padding: 5px;
+    border-color: #161623;
+    background-image: linear-gradient(to top, #003F5C 0%, #24244b 100%);
 }
 
 .class-item {
@@ -201,3 +230,4 @@ h2 {
     max-height: 50px;
     margin-right: 10px;
 }
+
